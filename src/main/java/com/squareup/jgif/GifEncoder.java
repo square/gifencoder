@@ -17,10 +17,10 @@ public final class GifEncoder {
    * @param outputStream the output stream to which the GIF data will be written
    * @param screenWidth the width of the entire graphic
    * @param screenHeight the height of the entire graphic
-   * @param repeatCount how many times to reapeat the animation; use 0 to loop indefinitely
+   * @param loopCount how many times to reapeat the animation; use 0 to loop indefinitely
    * @throws IOException if there was a problem writing to the given output stream
    */
-  public GifEncoder(OutputStream outputStream, int screenWidth, int screenHeight, int repeatCount)
+  public GifEncoder(OutputStream outputStream, int screenWidth, int screenHeight, int loopCount)
       throws IOException {
     this.outputStream = outputStream;
     this.screenWidth = screenWidth;
@@ -28,7 +28,7 @@ public final class GifEncoder {
     HeaderBlock.write(outputStream);
     LogicalScreenDescriptorBlock.write(outputStream, screenWidth, screenHeight, false, 1, false, 0,
         0, 0);
-    NetscapeLoopingExtensionBlock.write(outputStream, repeatCount);
+    NetscapeLoopingExtensionBlock.write(outputStream, loopCount);
   }
 
   public GifEncoder addImage(int[][] rgbData, ImageOptions options) throws IOException {

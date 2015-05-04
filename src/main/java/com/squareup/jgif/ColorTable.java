@@ -15,7 +15,7 @@ final class ColorTable {
     this.colorToIndex = colorToIndex;
   }
 
-  public static ColorTable fromColors(Set<Color> colors) {
+  static ColorTable fromColors(Set<Color> colors) {
     Map<Integer, Color> indexToColor = new HashMap<>();
     Map<Color, Integer> colorToIndex = new HashMap<>();
 
@@ -31,20 +31,20 @@ final class ColorTable {
     return new ColorTable(indexToColor, colorToIndex);
   }
 
-  public int size() {
+  int size() {
     return colorToIndex.size();
   }
 
-  public void write(OutputStream outputStream, int paddedColorCount) throws IOException {
-    for (Color color : colorToIndex.keySet()) {
-      Streams.writeRgb(outputStream, color.getRgbInt());
+  void write(OutputStream outputStream, int paddedColorCount) throws IOException {
+    for (int i = 0; i < size(); ++i) {
+      Streams.writeRgb(outputStream, indexToColor.get(i).getRgbInt());
     }
     for (int i = size(); i < paddedColorCount; ++i) {
       Streams.writeRgb(outputStream, 0);
     }
   }
 
-  public Color getColor(int index) {
+  Color getColor(int index) {
     Color color = indexToColor.get(index);
     if (color == null) {
       throw new IllegalArgumentException("Index out of bounds: " + index);
@@ -52,15 +52,7 @@ final class ColorTable {
     return color;
   }
 
-  public int getIndex(Color color) {
-    Integer index = colorToIndex.get(color);
-    if (index == null) {
-      throw new IllegalArgumentException("Color not in table: " + color);
-    }
-    return index;
-  }
-
-  public int[] getIndices(Image image) {
+  int[] getIndices(Image image) {
     int[] result = new int[image.getNumPixels()];
     for (int i = 0; i < result.length; ++i) {
       result[i] = colorToIndex.get(image.getColor(i));

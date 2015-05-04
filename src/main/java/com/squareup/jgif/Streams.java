@@ -4,6 +4,8 @@ import java.io.IOException;
 import java.io.OutputStream;
 
 class Streams {
+  private Streams() {}
+
   static void writeShort(OutputStream outputStream, int n) throws IOException {
     // Little-endian encoded.
     outputStream.write(n);
