@@ -6,7 +6,7 @@ There is currently no support for transparency.
 
 ### Quantization and dithering
 
-GIF images are limited to 256 colors. If you try to encode an image with more than 256 colors, gifencoder's default behavior is to perform [median-cut quantization](http://en.wikipedia.org/wiki/Median_cut) and [Floyd-Steinberg dithering](http://en.wikipedia.org/wiki/Floyd%E2%80%93Steinberg_dithering). That behavior is configurable though, and you can plug in a custom quantizer or ditherer.
+GIF images are limited to 256 colors. If you try to encode an image with more than 256 colors, gifencoder's default behavior is to perform [median-cut quantization](http://en.wikipedia.org/wiki/Median_cut) with [Floyd-Steinberg dithering](http://en.wikipedia.org/wiki/Floyd%E2%80%93Steinberg_dithering). That behavior is configurable though, and you can plug in a custom quantizer or ditherer.
 
 ### Basic usage
 
@@ -35,10 +35,10 @@ Lenna, original PNG:
 
 ![Lenna original](gallery/lenna-original.png)
 
-Lenna GIF with k-means quantization and Floyd-Steinberg dithering
+Lenna GIF with k-means quantization and Floyd-Steinberg dithering:
 
 ![Lenna with k-means quantization and Floyd-Steinberg dithering](gallery/lenna-k-means.gif)
 
-Lenna GIF with median-cut quantization and Floyd-Steinberg dithering
+Lenna GIF with median-cut quantization and Floyd-Steinberg dithering:
 
 ![Lenna with median-cut quantization and Floyd-Steinberg dithering](gallery/lenna-median-cut.gif)
