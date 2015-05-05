@@ -1,4 +1,4 @@
-package com.squareup.jgif;
+package com.squareup.gifencoder;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -7,7 +7,7 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
-import static com.squareup.jgif.ColorAssert.assertThat;
+import static com.squareup.gifencoder.ColorAssert.assertThat;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class ColorTest {

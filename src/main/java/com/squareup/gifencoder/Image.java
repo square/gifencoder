@@ -1,4 +1,4 @@
-package com.squareup.jgif;
+package com.squareup.gifencoder;
 
 public final class Image {
   /**

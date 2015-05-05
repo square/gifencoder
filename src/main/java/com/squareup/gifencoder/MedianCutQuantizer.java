@@ -1,4 +1,4 @@
-package com.squareup.jgif;
+package com.squareup.gifencoder;
 
 import java.util.ArrayList;
 import java.util.Arrays;

@@ -1,4 +1,4 @@
-package com.squareup.jgif;
+package com.squareup.gifencoder;
 
 /**
  * Indicates the way in which the graphic is to be treated after being displayed.

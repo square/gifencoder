@@ -1,4 +1,4 @@
-package com.squareup.jgif;
+package com.squareup.gifencoder;
 
 import org.assertj.core.api.AbstractAssert;
 import org.assertj.core.api.Assertions;
