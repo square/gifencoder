@@ -18,7 +18,8 @@ public final class KMeansQuantizer implements ColorQuantizer {
   public static final KMeansQuantizer INSTANCE = new KMeansQuantizer();
   private static final Random random = new Random();
 
-  private KMeansQuantizer() {}
+  private KMeansQuantizer() {
+  }
 
   @Override public Set<Color> quantize(Set<Color> originalColors, int maxColorCount) {
     // We use the Forgy initialization method -- choose random colors as initial cluster centroids.

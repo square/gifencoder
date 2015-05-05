@@ -8,9 +8,10 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * For background, see Appendix F of the spec: http://www.w3.org/Graphics/GIF/spec-gif89a.txt
+ * For background, see Appendix F of the
+ * <a href="http://www.w3.org/Graphics/GIF/spec-gif89a.txt">GIF spec</a>.
  */
-class LzwEncoder {
+final class LzwEncoder {
 
   // Dummy values to represent special, GIF-specific instructions.
   private static final List<Integer> CLEAR_CODE = Collections.singletonList(-1);

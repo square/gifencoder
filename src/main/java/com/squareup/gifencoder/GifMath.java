@@ -1,7 +1,8 @@
 package com.squareup.gifencoder;
 
 final class GifMath {
-  private GifMath() {}
+  private GifMath() {
+  }
 
   static int roundUpToPowerOfTwo(int n) {
     n--;

@@ -11,7 +11,8 @@ final class NetscapeLoopingExtensionBlock {
   private static final int SUB_BLOCK_ID = 1;
   private static final int BLOCK_TERMINATOR = 0;
 
-  private NetscapeLoopingExtensionBlock() {}
+  private NetscapeLoopingExtensionBlock() {
+  }
 
   static void write(OutputStream outputStream, int loopCount) throws IOException {
     outputStream.write(EXTENSION_INTRODUCER);

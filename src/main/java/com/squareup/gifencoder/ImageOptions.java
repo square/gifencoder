@@ -13,7 +13,8 @@ public final class ImageOptions {
   /**
    * Create a new {@link ImageOptions} with all the defaults.
    */
-  public ImageOptions() {}
+  public ImageOptions() {
+  }
 
   public ImageOptions setLeft(int left) {
     this.left = left;

@@ -4,7 +4,8 @@ import java.io.IOException;
 import java.io.OutputStream;
 
 final class HeaderBlock {
-  private HeaderBlock() {}
+  private HeaderBlock() {
+  }
 
   static void write(OutputStream outputStream) throws IOException {
     Streams.writeAsciiString(outputStream, "GIF");

@@ -9,7 +9,8 @@ import java.util.Set;
 public final class NearestColorDitherer implements Ditherer {
   public static final NearestColorDitherer INSTANCE = new NearestColorDitherer();
 
-  private NearestColorDitherer() {}
+  private NearestColorDitherer() {
+  }
 
   @Override public Image dither(Image image, Set<Color> newColors) {
     int width = image.getWidth(), height = image.getHeight();

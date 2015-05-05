@@ -13,7 +13,7 @@ import java.util.WeakHashMap;
  *
  * <p>Similar to Guava's {code Ordering.arbitrary()}.
  */
-class ArbitraryComparator implements Comparator<Object> {
+final class ArbitraryComparator implements Comparator<Object> {
   public static final ArbitraryComparator INSTANCE = new ArbitraryComparator();
 
   /**
@@ -21,7 +21,8 @@ class ArbitraryComparator implements Comparator<Object> {
    */
   private static final WeakHashMap<Object, Integer> objectIndices = new WeakHashMap<>();
 
-  private ArbitraryComparator() {}
+  private ArbitraryComparator() {
+  }
 
   @Override public int compare(Object a, Object b) {
     if (a == b) return 0;

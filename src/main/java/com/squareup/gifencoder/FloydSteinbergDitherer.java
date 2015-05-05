@@ -13,7 +13,8 @@ public final class FloydSteinbergDitherer implements Ditherer {
       new ErrorComponent(0, 1, 5.0 / 16.0),
       new ErrorComponent(1, 1, 1.0 / 16.0));
 
-  private FloydSteinbergDitherer() {}
+  private FloydSteinbergDitherer() {
+  }
 
   @Override public Image dither(Image image, Set<Color> newColors) {
     int width = image.getWidth(), height = image.getHeight();

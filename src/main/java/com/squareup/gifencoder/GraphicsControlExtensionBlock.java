@@ -3,7 +3,7 @@ package com.squareup.gifencoder;
 import java.io.IOException;
 import java.io.OutputStream;
 
-class GraphicsControlExtensionBlock {
+final class GraphicsControlExtensionBlock {
   private static final int USER_INPUT_FLAG = 1 << 1;
   private static final int TRANSPARENT_COLOR_FLAG = 1;
 
@@ -12,10 +12,12 @@ class GraphicsControlExtensionBlock {
   private static final int GRAPHICS_CONTROL_EXTENSION_BLOCK_SIZE = 4;
   private static final int BLOCK_TERMINATOR = 0;
 
-  private GraphicsControlExtensionBlock() {}
+  private GraphicsControlExtensionBlock() {
+  }
 
   static void write(OutputStream outputStream, DisposalMethod disposalMethod, boolean userInput,
-      boolean transparentColor, int delayCentiseconds, int transparentColorIndex) throws IOException {
+      boolean transparentColor, int delayCentiseconds, int transparentColorIndex)
+      throws IOException {
     outputStream.write(EXTENSION_INTRODUCER);
     outputStream.write(GRAPHICS_CONTROL_LABEL);
     outputStream.write(GRAPHICS_CONTROL_EXTENSION_BLOCK_SIZE);

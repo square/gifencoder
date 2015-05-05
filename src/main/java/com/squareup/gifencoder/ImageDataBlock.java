@@ -3,8 +3,9 @@ package com.squareup.gifencoder;
 import java.io.IOException;
 import java.io.OutputStream;
 
-class ImageDataBlock {
-  private ImageDataBlock() {}
+final class ImageDataBlock {
+  private ImageDataBlock() {
+  }
 
   static void write(OutputStream outputStream, int minimumCodeSize, byte[] lzwData)
       throws IOException {

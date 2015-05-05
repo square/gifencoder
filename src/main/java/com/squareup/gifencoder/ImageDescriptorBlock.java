@@ -10,7 +10,8 @@ final class ImageDescriptorBlock {
   private static final int INTERLACE_FLAG = 1 << 6;
   private static final int SORT_FLAG = 1 << 5;
 
-  private ImageDescriptorBlock() {}
+  private ImageDescriptorBlock() {
+  }
 
   static void write(OutputStream outputStream, int imageLeft, int imageTop, int imageWidth,
       int imageHeight, boolean localColorTable, boolean interlace, boolean sort,

@@ -3,11 +3,12 @@ package com.squareup.gifencoder;
 import java.io.IOException;
 import java.io.OutputStream;
 
-class LogicalScreenDescriptorBlock {
+final class LogicalScreenDescriptorBlock {
   private static final int GLOBAL_COLOR_TABLE_FLAG = 1 << 7;
   private static final int SORT_FLAG = 1 << 3;
 
-  private LogicalScreenDescriptorBlock() {}
+  private LogicalScreenDescriptorBlock() {
+  }
 
   static void write(OutputStream outputStream, int logicalScreenWidth, int logicalScreenHeight,
       boolean globalColorTable, int colorResolution, boolean sort, int globalColorTableSize,

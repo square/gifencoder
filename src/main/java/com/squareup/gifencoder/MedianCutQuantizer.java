@@ -27,7 +27,8 @@ import java.util.TreeSet;
 public final class MedianCutQuantizer implements ColorQuantizer {
   public static final MedianCutQuantizer INSTANCE = new MedianCutQuantizer();
 
-  private MedianCutQuantizer() {}
+  private MedianCutQuantizer() {
+  }
 
   @Override public Set<Color> quantize(Set<Color> originalColors, int maxColorCount) {
     TreeSet<Cluster> clusters = new TreeSet<>();
