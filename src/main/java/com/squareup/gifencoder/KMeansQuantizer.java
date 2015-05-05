@@ -1,10 +1,9 @@
 package com.squareup.gifencoder;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.HashSet;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -20,47 +19,56 @@ public final class KMeansQuantizer implements ColorQuantizer {
   }
 
   @Override public Set<Color> quantize(Multiset<Color> originalColors, int maxColorCount) {
-    Collection<Color> centroids = getInitialCentroids(originalColors, maxColorCount);
-
-    int round = 0;
-    while (true) {
-      System.out.println(round++); // TODO
-      Collection<Multiset<Color>> clusters = assignClusters(originalColors, centroids);
-      Collection<Color> newCentroids = recomputeClusterCentroids(clusters);
-      if (newCentroids.equals(centroids)) {
-        // We've converged.
-        return new HashSet<>(centroids);
-      }
-      centroids = newCentroids;
-    }
-  }
-
-  private Collection<Color> getInitialCentroids(Multiset<Color> originalColors, int maxColorCount) {
-    // We use the Forgy initialization method: choose random colors as initial cluster centroids.
-    List<Color> colorList = new ArrayList<>(originalColors);
-    Collections.shuffle(colorList);
-    return colorList.subList(0, maxColorCount);
-  }
-
-  private static Collection<Multiset<Color>> assignClusters(Multiset<Color> originalColors,
-      Collection<Color> centroids) {
-    Map<Color, Multiset<Color>> clustersByCentroid = new HashMap<>(centroids.size());
-    for (Color centroid : centroids) {
+    Map<Color, Multiset<Color>> clustersByCentroid = new LinkedHashMap<>();
+    Set<Color> centroidsToRecompute = getInitialCentroids(originalColors, maxColorCount);
+    for (Color centroid : centroidsToRecompute) {
       clustersByCentroid.put(centroid, new HashMultiset<Color>());
     }
     for (Color color : originalColors.getDistinctElements()) {
-      int colorCount = originalColors.count(color);
-      Color closestCentroid = color.getNearestColor(centroids);
-      clustersByCentroid.get(closestCentroid).add(color, colorCount);
+      int count = originalColors.count(color);
+      clustersByCentroid.get(color.getNearestColor(centroidsToRecompute)).add(color, count);
     }
-    return clustersByCentroid.values();
+
+    while (!centroidsToRecompute.isEmpty()) {
+      recomputeCentroids(clustersByCentroid, centroidsToRecompute);
+      centroidsToRecompute.clear();
+
+      Set<Color> allCentroids = clustersByCentroid.keySet();
+      for (Color centroid : clustersByCentroid.keySet()) {
+        Multiset<Color> cluster = clustersByCentroid.get(centroid);
+        for (Color color : new ArrayList<>(cluster.getDistinctElements())) {
+          Color newCentroid = color.getNearestColor(allCentroids);
+          if (newCentroid != centroid) {
+            int count = cluster.count(color);
+            Multiset<Color> newCluster = clustersByCentroid.get(newCentroid);
+
+            cluster.remove(color, count);
+            newCluster.add(color, count);
+
+            centroidsToRecompute.add(centroid);
+            centroidsToRecompute.add(newCentroid);
+          }
+        }
+      }
+    }
+
+    return clustersByCentroid.keySet();
   }
 
-  private static Collection<Color> recomputeClusterCentroids(Collection<Multiset<Color>> clusters) {
-    Collection<Color> centroids = new ArrayList<>(clusters.size());
-    for (Multiset<Color> cluster : clusters) {
-      centroids.add(Color.getCentroid(cluster));
+  void recomputeCentroids(Map<Color, Multiset<Color>> clustersByCentroid,
+      Set<Color> centroidsToRecompute) {
+    for (Color oldCentroid : centroidsToRecompute) {
+      Multiset<Color> cluster = clustersByCentroid.get(oldCentroid);
+      Color newCentroid = Color.getCentroid(cluster);
+      clustersByCentroid.remove(oldCentroid);
+      clustersByCentroid.put(newCentroid, cluster);
     }
-    return centroids;
+  }
+
+  private Set<Color> getInitialCentroids(Multiset<Color> originalColors, int maxColorCount) {
+    // We use the Forgy initialization method: choose random colors as initial cluster centroids.
+    List<Color> colorList = new ArrayList<>(originalColors.getDistinctElements());
+    Collections.shuffle(colorList);
+    return new HashSet<>(colorList.subList(0, maxColorCount));
   }
 }
