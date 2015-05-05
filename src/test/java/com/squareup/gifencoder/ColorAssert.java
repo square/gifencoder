@@ -1,13 +1,10 @@
 package com.squareup.gifencoder;
 
 import org.assertj.core.api.AbstractAssert;
-import org.assertj.core.api.Assertions;
 import org.assertj.core.data.Offset;
 
-import static org.assertj.core.api.Assertions.assertThat;
-
 class ColorAssert extends AbstractAssert<ColorAssert, Color> {
-  ColorAssert(Color actual) {
+  private ColorAssert(Color actual) {
     super(actual, ColorAssert.class);
   }
 

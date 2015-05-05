@@ -22,7 +22,9 @@ public final class KMeansQuantizer implements ColorQuantizer {
   @Override public Set<Color> quantize(Multiset<Color> originalColors, int maxColorCount) {
     Collection<Color> centroids = getInitialCentroids(originalColors, maxColorCount);
 
+    int round = 0;
     while (true) {
+      System.out.println(round++); // TODO
       Collection<Multiset<Color>> clusters = assignClusters(originalColors, centroids);
       Collection<Color> newCentroids = recomputeClusterCentroids(clusters);
       if (newCentroids.equals(centroids)) {
@@ -42,7 +44,7 @@ public final class KMeansQuantizer implements ColorQuantizer {
 
   private static Collection<Multiset<Color>> assignClusters(Multiset<Color> originalColors,
       Collection<Color> centroids) {
-    Map<Color, Multiset<Color>> clustersByCentroid = new HashMap<>();
+    Map<Color, Multiset<Color>> clustersByCentroid = new HashMap<>(centroids.size());
     for (Color centroid : centroids) {
       clustersByCentroid.put(centroid, new HashMultiset<Color>());
     }
@@ -55,7 +57,7 @@ public final class KMeansQuantizer implements ColorQuantizer {
   }
 
   private static Collection<Color> recomputeClusterCentroids(Collection<Multiset<Color>> clusters) {
-    Collection<Color> centroids = new ArrayList<>();
+    Collection<Color> centroids = new ArrayList<>(clusters.size());
     for (Multiset<Color> cluster : clusters) {
       centroids.add(Color.getCentroid(cluster));
     }

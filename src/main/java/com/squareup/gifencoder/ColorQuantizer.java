@@ -4,7 +4,7 @@ import java.util.Set;
 
 public interface ColorQuantizer {
   /**
-   * Quantizes the given set of colors, returning a set no larger than {@code maxColors}.
+   * Quantize the given set of colors, returning a set no larger than {@code maxColors}.
    *
    * <p>The intent is to pick a set of colors which are representative of the original color set,
    * but no specific guarantees are made.

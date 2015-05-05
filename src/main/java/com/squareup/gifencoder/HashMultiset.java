@@ -19,31 +19,31 @@ public final class HashMultiset<E> extends AbstractCollection<E> implements Mult
 
   public HashMultiset(Collection<E> source) {
     this();
-    for (E value : source) {
-      add(value);
+    for (E element : source) {
+      add(element);
     }
   }
 
-  @Override public void add(E value, int n) {
-    if (elementCounts.containsKey(value)) {
-      elementCounts.get(value).value += n;
+  @Override public void add(E element, int n) {
+    if (elementCounts.containsKey(element)) {
+      elementCounts.get(element).value += n;
     } else {
-      elementCounts.put(value, new Count(n));
+      elementCounts.put(element, new Count(n));
     }
     size += n;
   }
 
-  @Override public boolean add(E value) {
-    add(value, 1);
+  @Override public boolean add(E element) {
+    add(element, 1);
     return true;
   }
 
-  @Override public int remove(Object value, int n) {
-    if (elementCounts.containsKey(value)) {
-      Count count = elementCounts.get(value);
+  @Override public int remove(Object element, int n) {
+    if (elementCounts.containsKey(element)) {
+      Count count = elementCounts.get(element);
       int removed;
       if (n >= count.value) {
-        elementCounts.remove(value);
+        elementCounts.remove(element);
         removed = count.value;
       } else {
         count.value -= n;
@@ -56,8 +56,8 @@ public final class HashMultiset<E> extends AbstractCollection<E> implements Mult
     }
   }
 
-  @Override public boolean remove(Object value) {
-    return remove(value, 1) > 0;
+  @Override public boolean remove(Object element) {
+    return remove(element, 1) > 0;
   }
 
   @Override public Iterator<E> iterator() {
@@ -112,7 +112,7 @@ public final class HashMultiset<E> extends AbstractCollection<E> implements Mult
         throw new IllegalStateException("next() has not been called");
       }
       if (currentElementRemoved) {
-        throw new IllegalStateException("remove() alread called for current element");
+        throw new IllegalStateException("remove() already called for current element");
       }
       HashMultiset.this.remove(currentElement);
     }

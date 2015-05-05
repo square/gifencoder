@@ -16,7 +16,7 @@ public final class GifEncoder {
    * @param outputStream the output stream to which the GIF data will be written
    * @param screenWidth the width of the entire graphic
    * @param screenHeight the height of the entire graphic
-   * @param loopCount how many times to reapeat the animation; use 0 to loop indefinitely
+   * @param loopCount how many times to repeat the animation; use 0 to loop indefinitely
    * @throws IOException if there was a problem writing to the given output stream
    */
   public GifEncoder(OutputStream outputStream, int screenWidth, int screenHeight, int loopCount)
