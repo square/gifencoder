@@ -30,10 +30,11 @@ public final class Color {
     return new Color(redComponent / 255.0, greenComponent / 255.0, blueComponent / 255.0);
   }
 
-  public static Color getCentroid(Collection<Color> colors) {
+  public static Color getCentroid(Multiset<Color> colors) {
     Color sum = Color.BLACK;
-    for (Color color : colors) {
-      sum = sum.plus(color);
+    for (Color color : colors.getDistinctElements()) {
+      int weight = colors.count(color);
+      sum = sum.plus(color.scaled(weight));
     }
     return sum.scaled(1.0 / colors.size());
   }

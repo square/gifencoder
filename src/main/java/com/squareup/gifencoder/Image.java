@@ -1,5 +1,12 @@
 package com.squareup.gifencoder;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+
 /**
  * An immutable grid of pixel colors.
  */
@@ -9,8 +16,12 @@ public final class Image {
    */
   private final Color[][] colors;
 
-  public Image(Color[][] colors) {
+  private Image(Color[][] colors) {
     this.colors = colors;
+  }
+
+  public static Image fromColors(Color[][] colors) {
+    return new Image(colors);
   }
 
   public static Image fromRgb(int[][] rgb) {
@@ -48,6 +59,15 @@ public final class Image {
 
   public Color getColor(int index) {
     return colors[index / getWidth()][index % getWidth()];
+  }
+
+  Multiset<Color> getColors() {
+    Multiset<Color> colorCounts = new HashMultiset<>();
+    for (int i = 0; i < getNumPixels(); ++i) {
+      Color color = getColor(i);
+      colorCounts.add(color);
+    }
+    return colorCounts;
   }
 
   public int getWidth() {

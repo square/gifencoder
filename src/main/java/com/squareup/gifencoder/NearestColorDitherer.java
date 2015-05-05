@@ -20,6 +20,6 @@ public final class NearestColorDitherer implements Ditherer {
         colors[y][x] = image.getColor(x, y).getNearestColor(newColors);
       }
     }
-    return new Image(colors);
+    return Image.fromColors(colors);
   }
 }

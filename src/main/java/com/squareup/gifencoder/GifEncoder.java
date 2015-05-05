@@ -2,7 +2,6 @@ package com.squareup.gifencoder;
 
 import java.io.IOException;
 import java.io.OutputStream;
-import java.util.HashSet;
 import java.util.Set;
 
 public final class GifEncoder {
@@ -76,13 +75,14 @@ public final class GifEncoder {
       throw new IllegalArgumentException("Image does not fit in screen.");
     }
 
-    Set<Color> originalColors = getDistinctColors(image);
-    if (originalColors.size() > MAX_COLOR_COUNT) {
-      Set<Color> newColors = options.quantizer.quantize(originalColors, MAX_COLOR_COUNT);
-      image = options.ditherer.dither(image, newColors);
+    Multiset<Color> originalColors = image.getColors();
+    Set<Color> distinctColors = originalColors.getDistinctElements();
+    if (distinctColors.size() > MAX_COLOR_COUNT) {
+      distinctColors = options.quantizer.quantize(originalColors, MAX_COLOR_COUNT);
+      image = options.ditherer.dither(image, distinctColors);
     }
 
-    ColorTable colorTable = ColorTable.fromColors(getDistinctColors(image));
+    ColorTable colorTable = ColorTable.fromColors(distinctColors);
     int paddedColorCount = colorTable.paddedSize();
     int[] colorIndices = colorTable.getIndices(image);
 
@@ -95,19 +95,12 @@ public final class GifEncoder {
     ImageDataBlock.write(outputStream, LzwEncoder.getMinimumCodeSize(paddedColorCount), lzwData);
   }
 
-  private static Set<Color> getDistinctColors(Image image) {
-    Set<Color> colors = new HashSet<>();
-    for (int i = 0; i < image.getNumPixels(); ++i) {
-      colors.add(image.getColor(i));
-    }
-    return colors;
-  }
-
   /**
    * Compute the "size of the color table" field as the spec defines it:
    *
-   * <blockquote>this field is used to calculate the number of bytes contained in the Global Color Table. To
-   * determine that actual size of the color table, raise 2 to [the value of the field + 1]
+   * <blockquote>this field is used to calculate the number of bytes contained in the Global Color
+   * Table. To determine that actual size of the color table, raise 2 to [the value of the field +
+   * 1]</blockquote>
    */
   private static int getColorTableSizeField(int actualTableSize) {
     int size = 0;

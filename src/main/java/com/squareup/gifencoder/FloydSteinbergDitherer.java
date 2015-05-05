@@ -41,7 +41,7 @@ public final class FloydSteinbergDitherer implements Ditherer {
         }
       }
     }
-    return new Image(colors);
+    return Image.fromColors(colors);
   }
 
   private static final class ErrorComponent {

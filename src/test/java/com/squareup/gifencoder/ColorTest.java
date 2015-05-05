@@ -24,11 +24,12 @@ public class ColorTest {
   }
 
   @Test public void testGetCentroid() {
-    assertThat(Color.getCentroid(Collections.singletonList(Color.BLACK)))
+    assertThat(Color.getCentroid(new HashMultiset<>(Collections.singletonList(Color.BLACK))))
         .isEqualTo(Color.BLACK, EPSILON);
-    assertThat(Color.getCentroid(Collections.singletonList(Color.WHITE)))
+    assertThat(Color.getCentroid(new HashMultiset<>(Collections.singletonList(Color.WHITE))))
         .isEqualTo(Color.WHITE, EPSILON);
-    assertThat(Color.getCentroid(Arrays.asList(Color.RED, Color.GREEN, Color.BLACK)))
+    assertThat(
+        Color.getCentroid(new HashMultiset<>(Arrays.asList(Color.RED, Color.GREEN, Color.BLACK))))
         .isEqualTo(new Color(1.0 / 3.0, 1.0 / 3.0, 0), EPSILON);
   }
 

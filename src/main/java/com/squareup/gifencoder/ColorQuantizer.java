@@ -9,9 +9,9 @@ public interface ColorQuantizer {
    * <p>The intent is to pick a set of colors which are representative of the original color set,
    * but no specific guarantees are made.
    *
-   * @param originalColors the full set of original colors
+   * @param originalColors the colors in the original image
    * @param maxColorCount the maximum number of colors to allow
-   * @return a collection of colors no larger than {@code maxColors}
+   * @return a quantized collection of colors no larger than {@code maxColors}
    */
-  Set<Color> quantize(Set<Color> originalColors, int maxColorCount);
+  Set<Color> quantize(Multiset<Color> originalColors, int maxColorCount);
 }

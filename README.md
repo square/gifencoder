@@ -38,10 +38,14 @@ Lenna, original PNG:
 
 ![Lenna original](gallery/lenna-original.png)
 
-Lenna GIF with k-means quantization and Floyd-Steinberg dithering:
+Lenna with uniform quantization and Floyd-Steinberg dithering:
 
-![Lenna with k-means quantization and Floyd-Steinberg dithering](gallery/lenna-k-means.gif)
+![Lenna with uniform quantization and Floyd-Steinberg dithering](gallery/lenna-uniform.gif)
 
 Lenna GIF with median-cut quantization and Floyd-Steinberg dithering:
 
 ![Lenna with median-cut quantization and Floyd-Steinberg dithering](gallery/lenna-median-cut.gif)
+
+Lenna GIF with k-means quantization and Floyd-Steinberg dithering:
+
+![Lenna with k-means quantization and Floyd-Steinberg dithering](gallery/lenna-k-means.gif)
