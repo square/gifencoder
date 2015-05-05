@@ -8,8 +8,12 @@ import java.util.Collection;
  * Values outside of [0, 1] are permitted though, as this is convenient e.g. for representing color
  * deltas.
  */
-class Color {
+public final class Color {
   public static final Color BLACK = new Color(0, 0, 0);
+  public static final Color WHITE = new Color(1, 1, 1);
+  public static final Color RED = new Color(1, 0, 0);
+  public static final Color GREEN = new Color(0, 1, 0);
+  public static final Color BLUE = new Color(0, 0, 1);
 
   private final double red, green, blue;
 
@@ -98,5 +102,9 @@ class Color {
 
   @Override public int hashCode() {
     return Arrays.hashCode(new double[] { red, green, blue });
+  }
+
+  @Override public String toString() {
+    return String.format("Color[%f, %f, %f]", red, green, blue);
   }
 }
