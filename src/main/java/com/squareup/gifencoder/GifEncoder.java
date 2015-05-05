@@ -67,7 +67,7 @@ public final class GifEncoder {
     ColorTable colorTable = ColorTable.fromColors(getDistinctColors(image));
     int[] colorIndices = colorTable.getIndices(image);
 
-    GraphicsControlExtensionBlock.write(outputStream, DisposalMethod.DO_NOT_DISPOSE, false, false,
+    GraphicsControlExtensionBlock.write(outputStream, options.disposalMethod, false, false,
         options.delayCentiseconds, 0);
     int paddedColorCount = GifMath.roundUpToPowerOfTwo(colorTable.size());
     ImageDescriptorBlock.write(outputStream, options.left, options.top, image.getWidth(),
