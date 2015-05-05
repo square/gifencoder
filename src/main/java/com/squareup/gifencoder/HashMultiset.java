@@ -81,6 +81,7 @@ public final class HashMultiset<E> extends AbstractCollection<E> implements Mult
     final Iterator<E> distinctElementIterator;
     E currentElement;
     int currentCount;
+    boolean currentElementRemoved;
 
     HashMultisetIterator() {
       this.distinctElementIterator = getDistinctElements().iterator();
@@ -102,7 +103,18 @@ public final class HashMultiset<E> extends AbstractCollection<E> implements Mult
       }
 
       --currentCount;
+      currentElementRemoved = false;
       return currentElement;
+    }
+
+    @Override public void remove() {
+      if (currentElement == null) {
+        throw new IllegalStateException("next() has not been called");
+      }
+      if (currentElementRemoved) {
+        throw new IllegalStateException("remove() alread called for current element");
+      }
+      HashMultiset.this.remove(currentElement);
     }
   }
 

@@ -7,7 +7,7 @@ There is currently no support for transparency.
 
 ### Quantization and dithering
 
-GIF images are limited to 256 colors. If you supply an image with more colors, gifencoder's default behavior is to perform [median-cut quantization](http://en.wikipedia.org/wiki/Median_cut) with [Floyd-Steinberg dithering](http://en.wikipedia.org/wiki/Floyd%E2%80%93Steinberg_dithering). You can configure a different quantizer or ditherer through `ImageOptions`.
+GIF images are limited to 256 colors. If you supply an image with more colors, gifencoder's default behavior is to perform [median-cut quantization](http://en.wikipedia.org/wiki/Median_cut) with [Floyd-Steinberg dithering](http://en.wikipedia.org/wiki/Floyd%E2%80%93Steinberg_dithering). You can configure this behavior through `ImageOptions`. A handful of quantizers and ditherers are provided, but you can also plug in your own implementation.
 
 
 ### Basic usage
