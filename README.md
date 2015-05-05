@@ -1,12 +1,14 @@
 # gifencoder
 
-gifencoder is a pure Java library implementing the [GIF89a](http://www.w3.org/Graphics/GIF/spec-gif89a.txt) specification. It does not use AWT's `BufferedImage`, so it can be used on Android and other platforms lacking AWT.
+gifencoder is a pure Java library implementing the [GIF89a specification](http://www.w3.org/Graphics/GIF/spec-gif89a.txt). It does not use AWT's `BufferedImage`, so it can be used on Android and other platforms lacking AWT.
 
 There is currently no support for transparency.
 
+
 ### Quantization and dithering
 
-GIF images are limited to 256 colors. If you try to encode an image with more than 256 colors, gifencoder's default behavior is to perform [median-cut quantization](http://en.wikipedia.org/wiki/Median_cut) with [Floyd-Steinberg dithering](http://en.wikipedia.org/wiki/Floyd%E2%80%93Steinberg_dithering). That behavior is configurable though, and you can plug in a custom quantizer or ditherer.
+GIF images are limited to 256 colors. If you supply an image with more colors, gifencoder's default behavior is to perform [median-cut quantization](http://en.wikipedia.org/wiki/Median_cut) with [Floyd-Steinberg dithering](http://en.wikipedia.org/wiki/Floyd%E2%80%93Steinberg_dithering). You can configure a different quantizer or ditherer through `ImageOptions`.
+
 
 ### Basic usage
 
@@ -24,6 +26,7 @@ new GifEncoder(outputStream, width, height, 0)
         .finishEncoding();
 outputStream.close();
 ```
+
 
 ### Gallery
 
