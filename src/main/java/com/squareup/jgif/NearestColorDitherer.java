@@ -2,7 +2,11 @@ package com.squareup.jgif;
 
 import java.util.Set;
 
-public class NearestColorDitherer implements Ditherer {
+/**
+ * A trivial "ditherer" which always picks the closest color for each pixel, with no error
+ * propagation.
+ */
+public final class NearestColorDitherer implements Ditherer {
   public static final NearestColorDitherer INSTANCE = new NearestColorDitherer();
 
   private NearestColorDitherer() {}

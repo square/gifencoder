@@ -45,7 +45,7 @@ public final class MedianCutQuantizer implements ColorQuantizer {
     return clusterCentroids;
   }
 
-  private static class Cluster implements Comparable<Cluster> {
+  private static final class Cluster implements Comparable<Cluster> {
     final Set<Color> colors;
     double largestSpread;
     int componentWithLargestSpread;
@@ -93,7 +93,7 @@ public final class MedianCutQuantizer implements ColorQuantizer {
     }
   }
 
-  private static class ColorComponentComparator implements Comparator<Color> {
+  private static final class ColorComponentComparator implements Comparator<Color> {
     final int component;
 
     private ColorComponentComparator(int component) {

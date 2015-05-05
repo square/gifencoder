@@ -1,6 +1,6 @@
 package com.squareup.jgif;
 
-class Image {
+public final class Image {
   /**
    * The first index corresponds to the row, while the second index corresponds the column.
    */

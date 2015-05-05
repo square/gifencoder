@@ -1,13 +1,13 @@
 package com.squareup.jgif;
 
 import java.util.Arrays;
-import java.util.List;
+import java.util.Collection;
 import java.util.Set;
 
-final class FloydSteinbergDitherer implements Ditherer {
+public final class FloydSteinbergDitherer implements Ditherer {
   public static final FloydSteinbergDitherer INSTANCE = new FloydSteinbergDitherer();
 
-  private static final List<ErrorComponent> ERROR_DISTRIBUTION = Arrays.asList(
+  private static final Collection<ErrorComponent> ERROR_DISTRIBUTION = Arrays.asList(
       new ErrorComponent(1, 0, 7.0 / 16.0),
       new ErrorComponent(-1, 1, 3.0 / 16.0),
       new ErrorComponent(0, 1, 5.0 / 16.0),
@@ -43,7 +43,7 @@ final class FloydSteinbergDitherer implements Ditherer {
     return new Image(colors);
   }
 
-  private static class ErrorComponent {
+  private static final class ErrorComponent {
     final int deltaX, deltaY;
     final double errorFraction;
 
