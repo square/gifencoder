@@ -15,11 +15,14 @@ import java.util.TreeSet;
  *
  * <p>The algorithm works as follows:
  *
- * <ul> <li>Begin with one cluster containing all the original colors.</li> <li>Find the cluster
- * containing the greatest spread along a single color component (red, green or blue).</li> <li>Find
- * the median of that color component among colors in the cluster.</li> <li>Split the cluster into
- * two halves, using that median as a threshold.</li> <li>Repeat this process until the desired
- * number of clusters is reached.</li> </ul>
+ * <ul>
+ *   <li>Begin with one cluster containing all the original colors.</li>
+ *   <li>Find the cluster containing the greatest spread along a single color component (red, green
+ *   or blue).</li>
+ *   <li>Find the median of that color component among colors in the cluster.</li>
+ *   <li>Split the cluster into two halves, using that median as a threshold.</li>
+ *   <li>Repeat this process until the desired number of clusters is reached.</li>
+ * </ul>
  */
 public final class MedianCutQuantizer implements ColorQuantizer {
   public static final MedianCutQuantizer INSTANCE = new MedianCutQuantizer();

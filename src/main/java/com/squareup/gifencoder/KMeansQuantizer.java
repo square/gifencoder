@@ -9,8 +9,8 @@ import java.util.Map;
 import java.util.Set;
 
 /**
- * Uses k-means clustering for color quantization. This may yield better results than {@link
- * MedianCutQuantizer}, but it is considerably slower so it is not recommended for large images.
+ * Uses k-means clustering for color quantization. This tends to yield good results, but convergence
+ * can be slow. It is not recommended for large images.
  */
 public final class KMeansQuantizer implements ColorQuantizer {
   public static final KMeansQuantizer INSTANCE = new KMeansQuantizer();
