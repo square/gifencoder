@@ -25,7 +25,7 @@ public class HashMultisetTest {
   @Test public void testSize() {
     assertThat(multiset()).hasSize(0);
     assertThat(multiset("a")).hasSize(1);
-    assertThat(multiset("a", "b")).hasSize(1);
+    assertThat(multiset("a", "b")).hasSize(2);
     assertThat(multiset("a", "b", "c")).hasSize(3);
   }
 
