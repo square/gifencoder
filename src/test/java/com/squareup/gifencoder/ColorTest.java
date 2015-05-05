@@ -18,8 +18,9 @@ public class ColorTest {
   @Test public void testFromRgbInt() {
     assertThat(Color.fromRgbInt(0)).isEqualTo(Color.BLACK, EPSILON);
     assertThat(Color.fromRgbInt(0xFFFFFF)).isEqualTo(Color.WHITE, EPSILON);
-    assertThat(Color.fromRgbInt(0xAABBCC)).isEqualTo(
-        new Color(0xAA / 255.0, 0xBB / 255.0, 0xCC / 255.0), EPSILON);
+    assertThat(Color.fromRgbInt(0xFF0000)).isEqualTo(Color.RED, EPSILON);
+    assertThat(Color.fromRgbInt(0x00FF00)).isEqualTo(Color.GREEN, EPSILON);
+    assertThat(Color.fromRgbInt(0x0000FF)).isEqualTo(Color.BLUE, EPSILON);
   }
 
   @Test public void testGetCentroid() {
@@ -87,9 +88,9 @@ public class ColorTest {
 
   @Test public void testGetRgbInt() {
     assertThat(Color.BLACK.getRgbInt()).isEqualTo(0);
+    assertThat(Color.WHITE.getRgbInt()).isEqualTo(0xFFFFFF);
     assertThat(Color.RED.getRgbInt()).isEqualTo(0xFF0000);
     assertThat(Color.GREEN.getRgbInt()).isEqualTo(0x00FF00);
     assertThat(Color.BLUE.getRgbInt()).isEqualTo(0x0000FF);
-    assertThat(Color.WHITE.getRgbInt()).isEqualTo(0xFFFFFF);
   }
 }

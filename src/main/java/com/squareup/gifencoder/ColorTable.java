@@ -31,25 +31,21 @@ final class ColorTable {
     return new ColorTable(indexToColor, colorToIndex);
   }
 
-  int size() {
+  int paddedSize() {
+    return GifMath.roundUpToPowerOfTwo(unpaddedSize());
+  }
+
+  int unpaddedSize() {
     return colorToIndex.size();
   }
 
-  void write(OutputStream outputStream, int paddedColorCount) throws IOException {
-    for (int i = 0; i < size(); ++i) {
+  void write(OutputStream outputStream) throws IOException {
+    for (int i = 0; i < unpaddedSize(); ++i) {
       Streams.writeRgb(outputStream, indexToColor.get(i).getRgbInt());
     }
-    for (int i = size(); i < paddedColorCount; ++i) {
+    for (int i = unpaddedSize(); i < paddedSize(); ++i) {
       Streams.writeRgb(outputStream, 0);
     }
-  }
-
-  Color getColor(int index) {
-    Color color = indexToColor.get(index);
-    if (color == null) {
-      throw new IllegalArgumentException("Index out of bounds: " + index);
-    }
-    return color;
   }
 
   int[] getIndices(Image image) {
@@ -58,9 +54,5 @@ final class ColorTable {
       result[i] = colorToIndex.get(image.getColor(i));
     }
     return result;
-  }
-
-  public int getColorCount() {
-    return indexToColor.size();
   }
 }

@@ -31,11 +31,28 @@ public final class GifEncoder {
     NetscapeLoopingExtensionBlock.write(outputStream, loopCount);
   }
 
+  /**
+   * Add an image to the GIF file.
+   *
+   * @param rgbData a grid of pixels in RGB format
+   * @param options options to be applied to this image
+   * @return this instance for chaining
+   * @throws IOException if there was a problem writing to the given output stream
+   */
   public GifEncoder addImage(int[][] rgbData, ImageOptions options) throws IOException {
     addImage(Image.fromRgb(rgbData), options);
     return this;
   }
 
+  /**
+   * Add an image to the GIF file.
+   *
+   * @param rgbData an image buffer in RGB format
+   * @param width the number of pixels per row in the pixel array
+   * @param options options to be applied to this image
+   * @return this instance for chaining
+   * @throws IOException if there was a problem writing to the given output stream
+   */
   public GifEncoder addImage(int[] rgbData, int width, ImageOptions options) throws IOException {
     addImage(Image.fromRgb(rgbData, width), options);
     return this;
@@ -64,15 +81,16 @@ public final class GifEncoder {
       Set<Color> newColors = options.quantizer.quantize(originalColors, MAX_COLOR_COUNT);
       image = options.ditherer.dither(image, newColors);
     }
+
     ColorTable colorTable = ColorTable.fromColors(getDistinctColors(image));
+    int paddedColorCount = colorTable.paddedSize();
     int[] colorIndices = colorTable.getIndices(image);
 
     GraphicsControlExtensionBlock.write(outputStream, options.disposalMethod, false, false,
         options.delayCentiseconds, 0);
-    int paddedColorCount = GifMath.roundUpToPowerOfTwo(colorTable.size());
     ImageDescriptorBlock.write(outputStream, options.left, options.top, image.getWidth(),
         image.getHeight(), true, false, false, getColorTableSizeField(paddedColorCount));
-    colorTable.write(outputStream, paddedColorCount);
+    colorTable.write(outputStream);
     byte[] lzwData = new LzwEncoder(paddedColorCount).encode(colorIndices);
     ImageDataBlock.write(outputStream, LzwEncoder.getMinimumCodeSize(paddedColorCount), lzwData);
   }
@@ -88,7 +106,7 @@ public final class GifEncoder {
   /**
    * Compute the "size of the color table" field as the spec defines it:
    *
-   * <p>"this field is used to calculate the number of bytes contained in the Global Color Table. To
+   * <blockquote>this field is used to calculate the number of bytes contained in the Global Color Table. To
    * determine that actual size of the color table, raise 2 to [the value of the field + 1]
    */
   private static int getColorTableSizeField(int actualTableSize) {

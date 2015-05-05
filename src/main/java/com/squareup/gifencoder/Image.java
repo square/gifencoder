@@ -1,12 +1,15 @@
 package com.squareup.gifencoder;
 
+/**
+ * An immutable grid of pixel colors.
+ */
 public final class Image {
   /**
    * The first index corresponds to the row, while the second index corresponds the column.
    */
   private final Color[][] colors;
 
-  Image(Color[][] colors) {
+  public Image(Color[][] colors) {
     this.colors = colors;
   }
 
@@ -14,6 +17,9 @@ public final class Image {
     int height = rgb.length, width = rgb[0].length;
     Color[][] colors = new Color[height][width];
     for (int y = 0; y < height; ++y) {
+      if (rgb[y].length != width) {
+        throw new IllegalArgumentException("rows lengths do not match in RGB array");
+      }
       for (int x = 0; x < width; ++x) {
         colors[y][x] = Color.fromRgbInt(rgb[y][x]);
       }

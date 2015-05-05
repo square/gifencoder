@@ -17,9 +17,11 @@ final class ArbitraryComparator implements Comparator<Object> {
   public static final ArbitraryComparator INSTANCE = new ArbitraryComparator();
 
   /**
-   * A custom scheme for ordering arbitrary objects.
+   * If we have no other way to order two objects in a stable manner, we will register both in this
+   * map and order them according to their associated values. The map's values are just integers
+   * corresponding to the order in which objects were added.
    */
-  private static final WeakHashMap<Object, Integer> objectIndices = new WeakHashMap<>();
+  private static final WeakHashMap<Object, Integer> objectIds = new WeakHashMap<>();
 
   private ArbitraryComparator() {
   }
@@ -35,18 +37,18 @@ final class ArbitraryComparator implements Comparator<Object> {
     }
 
     // We have an identityHashCode collision.
-    return getObjectIndex(a) - getObjectIndex(b);
+    return getObjectId(a) - getObjectId(b);
   }
 
   /**
-   * Get the index of an object, adding it to the index map if it isn't already registered.
+   * Get the ID of an object, adding it to the ID map if it isn't already registered.
    */
-  private static int getObjectIndex(Object object) {
-    synchronized (objectIndices) {
-      Integer id = objectIndices.get(object);
+  private static int getObjectId(Object object) {
+    synchronized (objectIds) {
+      Integer id = objectIds.get(object);
       if (id == null) {
-        id = objectIndices.size();
-        objectIndices.put(object, id);
+        id = objectIds.size();
+        objectIds.put(object, id);
       }
       return id;
     }

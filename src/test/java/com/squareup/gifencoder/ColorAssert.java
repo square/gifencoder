@@ -17,7 +17,9 @@ class ColorAssert extends AbstractAssert<ColorAssert, Color> {
 
   ColorAssert isEqualTo(Color expected, Offset<Double> offset) {
     for (int i = 0; i < 3; ++i) {
-      Assertions.assertThat(actual.getComponent(i)).isEqualTo(expected.getComponent(i), offset);
+      if (Math.abs(expected.getComponent(i) - actual.getComponent(i)) > offset.value) {
+        failWithMessage("Expected <%s> but received <%s>.", expected, actual);
+      }
     }
     return this;
   }
