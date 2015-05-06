@@ -8,7 +8,7 @@ import java.util.Set;
  * This is very fast but tends to yield poor results, so it should only be used in situations where
  * image quality is unimportant.
  */
-final class UniformQuantizer implements ColorQuantizer {
+public final class UniformQuantizer implements ColorQuantizer {
   public static final UniformQuantizer INSTANCE = new UniformQuantizer();
 
   private UniformQuantizer() {
