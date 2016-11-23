@@ -1,1 +1,11 @@
+# Maven
 target
+pom.xml.*
+release.properties
+
+# IntelliJ
+.idea
+*.iml
+
+# OS X
+.DS_Store
