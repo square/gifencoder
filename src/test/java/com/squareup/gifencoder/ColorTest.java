@@ -18,17 +18,14 @@ package com.squareup.gifencoder;
 import java.util.Arrays;
 import java.util.Collections;
 import org.assertj.core.data.Offset;
-import org.junit.Rule;
 import org.junit.Test;
-import org.junit.rules.ExpectedException;
 
 import static com.squareup.gifencoder.ColorAssert.assertThat;
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.Assert.fail;
 
 public class ColorTest {
   private static final Offset<Double> EPSILON = Offset.offset(1e-6);
-
-  @Rule public ExpectedException expectedException = ExpectedException.none();
 
   @Test public void testFromRgbInt() {
     assertThat(Color.fromRgbInt(0)).isEqualTo(Color.BLACK, EPSILON);
@@ -56,13 +53,21 @@ public class ColorTest {
   }
 
   @Test public void testGetComponent_negative() {
-    expectedException.expect(IllegalArgumentException.class);
-    Color.BLACK.getComponent(-1);
+    try {
+      Color.BLACK.getComponent(-1);
+      fail();
+    } catch (IllegalArgumentException e) {
+      assertThat(e).hasMessage("Unexpected component index: -1");
+    }
   }
 
   @Test public void testGetComponent_tooLarge() {
-    expectedException.expect(IllegalArgumentException.class);
-    Color.BLACK.getComponent(3);
+    try {
+      Color.BLACK.getComponent(3);
+      fail();
+    } catch (IllegalArgumentException e) {
+      assertThat(e).hasMessage("Unexpected component index: 3");
+    }
   }
 
   @Test public void testScaled() {
