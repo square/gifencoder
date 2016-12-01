@@ -70,7 +70,7 @@ public final class KMeansQuantizer implements ColorQuantizer {
     return clustersByCentroid.keySet();
   }
 
-  void recomputeCentroids(Map<Color, Multiset<Color>> clustersByCentroid,
+  private static void recomputeCentroids(Map<Color, Multiset<Color>> clustersByCentroid,
       Set<Color> centroidsToRecompute) {
     for (Color oldCentroid : centroidsToRecompute) {
       Multiset<Color> cluster = clustersByCentroid.get(oldCentroid);
@@ -80,7 +80,7 @@ public final class KMeansQuantizer implements ColorQuantizer {
     }
   }
 
-  private Set<Color> getInitialCentroids(Multiset<Color> originalColors, int maxColorCount) {
+  private static Set<Color> getInitialCentroids(Multiset<Color> originalColors, int maxColorCount) {
     // We use the Forgy initialization method: choose random colors as initial cluster centroids.
     List<Color> colorList = new ArrayList<>(originalColors.getDistinctElements());
     Collections.shuffle(colorList);

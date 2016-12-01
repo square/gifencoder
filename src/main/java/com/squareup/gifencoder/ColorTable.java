@@ -50,7 +50,7 @@ final class ColorTable {
     return GifMath.roundUpToPowerOfTwo(unpaddedSize());
   }
 
-  int unpaddedSize() {
+  private int unpaddedSize() {
     return colorToIndex.size();
   }
 

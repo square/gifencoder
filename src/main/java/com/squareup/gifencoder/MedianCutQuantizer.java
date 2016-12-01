@@ -102,7 +102,7 @@ public final class MedianCutQuantizer implements ColorQuantizer {
   /**
    * Orders clusters according to their maximum spread, in descending order.
    */
-  private static final class ClusterSpreadComparator implements Comparator<Cluster> {
+  static final class ClusterSpreadComparator implements Comparator<Cluster> {
     @Override public int compare(Cluster a, Cluster b) {
       double spreadDifference = b.largestSpread - a.largestSpread;
       if (spreadDifference == 0) {
@@ -115,10 +115,10 @@ public final class MedianCutQuantizer implements ColorQuantizer {
   /**
    * Orders colors according to the value of one particular component, in ascending order.
    */
-  private static final class ColorComponentComparator implements Comparator<Color> {
+  static final class ColorComponentComparator implements Comparator<Color> {
     final int component;
 
-    private ColorComponentComparator(int component) {
+    ColorComponentComparator(int component) {
       this.component = component;
     }
 

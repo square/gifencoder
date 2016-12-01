@@ -31,7 +31,9 @@ public final class UniformQuantizer implements ColorQuantizer {
 
   @Override public Set<Color> quantize(Multiset<Color> originalColors, int maxColorCount) {
     int baseSegments = (int) Math.pow(maxColorCount, 1.0 / 3.0);
-    int redSegments = baseSegments, greenSegments = baseSegments, blueSegments = baseSegments;
+    int redSegments = baseSegments;
+    int greenSegments = baseSegments;
+    int blueSegments = baseSegments;
 
     // See if we can add an extra segment to one or two channels.
     if (redSegments * (greenSegments + 1) * blueSegments <= maxColorCount) {

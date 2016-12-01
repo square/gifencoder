@@ -33,7 +33,8 @@ public final class Image {
   }
 
   public static Image fromRgb(int[][] rgb) {
-    int height = rgb.length, width = rgb[0].length;
+    int height = rgb.length;
+    int width = rgb[0].length;
     Color[][] colors = new Color[height][width];
     for (int y = 0; y < height; ++y) {
       if (rgb[y].length != width) {

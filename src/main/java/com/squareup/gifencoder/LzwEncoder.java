@@ -44,7 +44,7 @@ final class LzwEncoder {
   private int codeSize;
   private List<Integer> indexBuffer = new ArrayList<>();
 
-  public LzwEncoder(int numColors) {
+  LzwEncoder(int numColors) {
     this.numColors = numColors;
     resetCodeTableAndCodeSize();
   }
@@ -53,7 +53,7 @@ final class LzwEncoder {
    * This computes what the spec refers to as "code size". The actual starting code size will be one
    * bit larger than this, because of the special "clear" and "end of info" codes.
    */
-  public static int getMinimumCodeSize(int numColors) {
+  static int getMinimumCodeSize(int numColors) {
     int size = 2; // Cannot be smaller than 2.
     while (numColors > 1 << size) {
       ++size;
@@ -61,7 +61,7 @@ final class LzwEncoder {
     return size;
   }
 
-  public byte[] encode(int[] indices) {
+  byte[] encode(int[] indices) {
     writeCode(codeTable.get(CLEAR_CODE));
     for (int index : indices) {
       processIndex(index);

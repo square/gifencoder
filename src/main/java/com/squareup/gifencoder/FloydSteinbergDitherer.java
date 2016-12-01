@@ -15,24 +15,24 @@
  */
 package com.squareup.gifencoder;
 
-import java.util.Arrays;
-import java.util.Collection;
 import java.util.Set;
 
 public final class FloydSteinbergDitherer implements Ditherer {
   public static final FloydSteinbergDitherer INSTANCE = new FloydSteinbergDitherer();
 
-  private static final Collection<ErrorComponent> ERROR_DISTRIBUTION = Arrays.asList(
+  private static final ErrorComponent[] ERROR_DISTRIBUTION = {
       new ErrorComponent(1, 0, 7.0 / 16.0),
       new ErrorComponent(-1, 1, 3.0 / 16.0),
       new ErrorComponent(0, 1, 5.0 / 16.0),
-      new ErrorComponent(1, 1, 1.0 / 16.0));
+      new ErrorComponent(1, 1, 1.0 / 16.0)
+  };
 
   private FloydSteinbergDitherer() {
   }
 
   @Override public Image dither(Image image, Set<Color> newColors) {
-    int width = image.getWidth(), height = image.getHeight();
+    int width = image.getWidth();
+    int height = image.getHeight();
     Color[][] colors = new Color[height][width];
     for (int y = 0; y < height; ++y) {
       for (int x = 0; x < width; ++x) {
@@ -63,7 +63,7 @@ public final class FloydSteinbergDitherer implements Ditherer {
     final int deltaX, deltaY;
     final double errorFraction;
 
-    private ErrorComponent(int deltaX, int deltaY, double errorFraction) {
+    ErrorComponent(int deltaX, int deltaY, double errorFraction) {
       this.deltaX = deltaX;
       this.deltaY = deltaY;
       this.errorFraction = errorFraction;

@@ -29,7 +29,9 @@ public final class Color {
   public static final Color GREEN = new Color(0, 1, 0);
   public static final Color BLUE = new Color(0, 0, 1);
 
-  private final double red, green, blue;
+  private final double red;
+  private final double green;
+  private final double blue;
 
   public Color(double red, double green, double blue) {
     this.red = red;

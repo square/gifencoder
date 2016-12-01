@@ -24,24 +24,20 @@ import java.util.NoSuchElementException;
 import java.util.Set;
 
 public final class HashMultiset<E> extends AbstractCollection<E> implements Multiset<E> {
-  private final Map<E, Count> elementCounts;
+  private final Map<E, Count> elementCounts = new HashMap<>();
   private int size;
 
   public HashMultiset() {
-    this.elementCounts = new HashMap<>();
-    this.size = 0;
   }
 
   public HashMultiset(Collection<E> source) {
-    this();
-    for (E element : source) {
-      add(element);
-    }
+    addAll(source);
   }
 
   @Override public void add(E element, int n) {
-    if (elementCounts.containsKey(element)) {
-      elementCounts.get(element).value += n;
+    Count count = elementCounts.get(element);
+    if (count != null) {
+      count.value += n;
     } else {
       elementCounts.put(element, new Count(n));
     }
@@ -54,21 +50,20 @@ public final class HashMultiset<E> extends AbstractCollection<E> implements Mult
   }
 
   @Override public int remove(Object element, int n) {
-    if (elementCounts.containsKey(element)) {
-      Count count = elementCounts.get(element);
-      int removed;
-      if (n >= count.value) {
-        elementCounts.remove(element);
-        removed = count.value;
-      } else {
-        count.value -= n;
-        removed = n;
-      }
-      size -= removed;
-      return removed;
-    } else {
+    Count count = elementCounts.get(element);
+    if (count == null) {
       return 0;
     }
+
+    if (n < count.value) {
+      count.value -= n;
+      size -= n;
+      return n;
+    }
+
+    elementCounts.remove(element);
+    size -= count.value;
+    return count.value;
   }
 
   @Override public boolean remove(Object element) {
