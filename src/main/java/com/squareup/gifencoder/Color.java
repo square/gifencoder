@@ -15,7 +15,6 @@
  */
 package com.squareup.gifencoder;
 
-import java.util.Arrays;
 import java.util.Collection;
 
 /**
@@ -117,7 +116,15 @@ public final class Color {
   }
 
   @Override public int hashCode() {
-    return Arrays.hashCode(new double[] { red, green, blue });
+    int result;
+    long temp;
+    temp = Double.doubleToLongBits(red);
+    result = (int) (temp ^ (temp >>> 32));
+    temp = Double.doubleToLongBits(green);
+    result = 31 * result + (int) (temp ^ (temp >>> 32));
+    temp = Double.doubleToLongBits(blue);
+    result = 31 * result + (int) (temp ^ (temp >>> 32));
+    return result;
   }
 
   @Override public String toString() {
