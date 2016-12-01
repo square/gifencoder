@@ -88,13 +88,13 @@ public final class HashMultiset<E> extends AbstractCollection<E> implements Mult
   }
 
   private final class HashMultisetIterator implements Iterator<E> {
-    final Iterator<E> distinctElementIterator;
+    final Iterator<Map.Entry<E, Count>> distinctElementIterator;
     E currentElement;
     int currentCount;
     boolean currentElementRemoved;
 
     HashMultisetIterator() {
-      this.distinctElementIterator = getDistinctElements().iterator();
+      this.distinctElementIterator = elementCounts.entrySet().iterator();
       this.currentCount = 0;
     }
 
@@ -108,8 +108,9 @@ public final class HashMultiset<E> extends AbstractCollection<E> implements Mult
       }
 
       if (currentCount == 0) {
-        currentElement = distinctElementIterator.next();
-        currentCount = count(currentElement);
+        Map.Entry<E, Count> next = distinctElementIterator.next();
+        currentElement = next.getKey();
+        currentCount = next.getValue().value;
       }
 
       --currentCount;
