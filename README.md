@@ -28,6 +28,25 @@ outputStream.close();
 ```
 
 
+### Download
+
+Gradle:
+```groovy
+compile 'com.squareup:gifencoder:0.9.0'
+```
+Maven:
+```xml
+<dependency>
+  <groupId>com.squareup</groupId>
+  <artifactId>gifencoder</artifactId>
+  <version>0.9.0</version>
+</dependency>
+```
+Or download [the latest JAR][jar]. 
+
+Snapshots of the development version are available in [Sonatype's `snapshots` repository][snap].
+
+
 ### Gallery
 
 Simple animation with median-cut quantization and Floyd-Steinberg dithering:
@@ -50,6 +69,8 @@ Lenna GIF with k-means quantization and Floyd-Steinberg dithering:
 
 ![Lenna with k-means quantization and Floyd-Steinberg dithering](gallery/lenna-k-means.gif)
 
+
+
 License
 =======
 
@@ -66,3 +87,7 @@ License
     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
     See the License for the specific language governing permissions and
     limitations under the License.
+
+
+ [jar]: https://search.maven.org/remote_content?g=com.squareup&a=gifencoder&v=LATEST
+ [snap]: https://oss.sonatype.org/content/repositories/snapshots/
