@@ -138,7 +138,7 @@ public final class OctTreeQuantizer implements ColorQuantizer {
             node.blueSum = node.blueSum / node.pixelCount;
             node.pixelCount = 1;
             inIndex++;
-            colors.add(Color.fromRgbInt(node.redSum, node.greenSum, node.blueSum));
+            colors.add(new Color((double) node.redSum / 255, (double) node.greenSum / 255, (double) node.blueSum / 255));
         } else {
             for (int i = 0; i < 8; i++) {
                 if (node.child[i] != null) {
