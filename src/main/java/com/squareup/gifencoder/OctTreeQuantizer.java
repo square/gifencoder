@@ -76,7 +76,9 @@ public final class OctTreeQuantizer implements ColorQuantizer {
             node.blueSum += blue;
         } else {
             shift = 7 - inLevel;
-            nIndex = (((red & mask[inLevel]) >> shift) << 2) | (((green & mask[inLevel]) >> shift) << 1) | ((blue & mask[inLevel]) >> shift);
+            nIndex = (((red & mask[inLevel]) >> shift) << 2)
+                    | (((green & mask[inLevel]) >> shift) << 1)
+                    | ((blue & mask[inLevel]) >> shift);
             Node tmpNode = node.child[nIndex];
             if (tmpNode == null) {
                 tmpNode = createNode(inLevel + 1);
@@ -106,7 +108,8 @@ public final class OctTreeQuantizer implements ColorQuantizer {
         int i;
         int redSum = 0, greenSum = 0, blueSum = 0, count = 0;
 
-        for (i = 7; (i > 0) && (nodeList[i] == null); i--) ;
+        for (i = 7; (i > 0) && (nodeList[i] == null); i--) {
+        }
 
         Node tmpNode = nodeList[i];
         nodeList[i] = tmpNode.next;
@@ -138,7 +141,10 @@ public final class OctTreeQuantizer implements ColorQuantizer {
             node.blueSum = node.blueSum / node.pixelCount;
             node.pixelCount = 1;
             inIndex++;
-            colors.add(new Color((double) node.redSum / 255, (double) node.greenSum / 255, (double) node.blueSum / 255));
+            double red = (double) node.redSum / 255;
+            double green = (double) node.greenSum / 255;
+            double blue = (double) node.blueSum / 255;
+            colors.add(new Color(red, green, blue));
         } else {
             for (int i = 0; i < 8; i++) {
                 if (node.child[i] != null) {
