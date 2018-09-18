@@ -47,7 +47,9 @@ final class ColorTable {
   }
 
   int paddedSize() {
-    return GifMath.roundUpToPowerOfTwo(unpaddedSize());
+    // The padded size needs to be at least 2, because it's impossible to encode a size of 1 in the
+    // image descriptor block, which uses a 2^(n+1) representation.
+    return Math.max(GifMath.roundUpToPowerOfTwo(unpaddedSize()), 2);
   }
 
   private int unpaddedSize() {
