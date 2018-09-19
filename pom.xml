@@ -10,7 +10,7 @@
 
   <groupId>com.squareup</groupId>
   <artifactId>gifencoder</artifactId>
-  <version>0.9.1-SNAPSHOT</version>
+  <version>0.9.1</version>
 
   <name>GIF Encoder</name>
   <description>A pure Java library implementing the GIF89a specification. Suitable for use on Android.</description>
@@ -27,7 +27,7 @@
     <url>http://github.com/square/gifencoder</url>
     <connection>scm:git:git://github.com/square/gifencoder.git</connection>
     <developerConnection>scm:git:ssh://git@github.com/square/gifencoder.git</developerConnection>
-    <tag>HEAD</tag>
+    <tag>gifencoder-0.9.1</tag>
   </scm>
 
   <issueManagement>
