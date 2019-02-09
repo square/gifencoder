@@ -84,7 +84,7 @@ public final class GifEncoder {
     outputStream.write(0x3B);
   }
 
-  private synchronized void addImage(Image image, ImageOptions options) throws IOException {
+  public synchronized void addImage(Image image, ImageOptions options) throws IOException {
     if (options.left + image.getWidth() > screenWidth
         || options.top + image.getHeight() > screenHeight) {
       throw new IllegalArgumentException("Image does not fit in screen.");
