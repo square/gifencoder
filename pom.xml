@@ -93,6 +93,31 @@
 
     <plugins>
       <plugin>
+        <groupId>org.moditect</groupId>
+        <artifactId>moditect-maven-plugin</artifactId>
+        <version>1.0.0.Beta2</version>
+        <executions>
+          <execution>
+            <id>add-module-infos</id>
+            <phase>package</phase>
+            <goals>
+              <goal>add-module-info</goal>
+            </goals>
+            <configuration>
+              <jvmVersion>9</jvmVersion>
+              <module>
+                <moduleInfoSource>
+                  module com.squareup.gifencoder {
+                    requires java.base;
+                    exports com.squareup.gifencoder;
+                  }
+                </moduleInfoSource>
+              </module>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+      <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-release-plugin</artifactId>
         <version>2.5.2</version>
