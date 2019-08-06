@@ -133,6 +133,9 @@ final class LzwEncoder {
     for (int i = 0; i < numColors; ++i) {
       codeTable.put(Collections.singletonList(i), i);
     }
+    for (int i = numColors; i < 4; ++i) {
+      codeTable.put(Collections.singletonList(i), 0);
+    }
     codeTable.put(CLEAR_CODE, codeTable.size());
     codeTable.put(END_OF_INFO, codeTable.size());
     return codeTable;
