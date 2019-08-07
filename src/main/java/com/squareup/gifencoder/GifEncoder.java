@@ -106,8 +106,10 @@ public final class GifEncoder {
     ImageDescriptorBlock.write(outputStream, options.left, options.top, image.getWidth(),
         image.getHeight(), true, false, false, getColorTableSizeField(paddedColorCount));
     colorTable.write(outputStream);
-    byte[] lzwData = new LzwEncoder(paddedColorCount).encode(colorIndices);
-    ImageDataBlock.write(outputStream, LzwEncoder.getMinimumCodeSize(paddedColorCount), lzwData);
+
+    LzwEncoder lzwEncoder = new LzwEncoder(paddedColorCount);
+    byte[] lzwData = lzwEncoder.encode(colorIndices);
+    ImageDataBlock.write(outputStream, lzwEncoder.getMinimumCodeSize(), lzwData);
   }
 
   /**
