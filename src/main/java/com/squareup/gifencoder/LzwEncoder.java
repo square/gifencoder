@@ -37,7 +37,7 @@ final class LzwEncoder {
    */
   private static final int MAX_CODE_TABLE_SIZE = 1 << 12;
 
-  private final int numColors;
+  private final int minimumCodeSize;
   private final BitSet outputBits = new BitSet();
   private int position = 0;
   private Map<List<Integer>, Integer> codeTable;
@@ -45,20 +45,27 @@ final class LzwEncoder {
   private List<Integer> indexBuffer = new ArrayList<>();
 
   /**
-   * @param numColors Padded number of colors, must be a power of 2
+   * @param colorTableSize Size of the (padded) color table; must be a power of 2
    */
-  LzwEncoder(int numColors) {
-    this.numColors = Math.max(numColors, 4);
+  LzwEncoder(int colorTableSize) {
+    if (!GifMath.isPowerOfTwo(colorTableSize)) {
+      throw new IllegalArgumentException("Color table size must be a power of 2");
+    }
+    this.minimumCodeSize = computeMinimumCodeSize(colorTableSize);
     resetCodeTableAndCodeSize();
+  }
+
+  int getMinimumCodeSize() {
+    return minimumCodeSize;
   }
 
   /**
    * This computes what the spec refers to as "code size". The actual starting code size will be one
    * bit larger than this, because of the special "clear" and "end of info" codes.
    */
-  static int getMinimumCodeSize(int numColors) {
-    int size = 2; // Cannot be smaller than 2.
-    while (numColors > 1 << size) {
+  private static int computeMinimumCodeSize(int colorTableSize) {
+    int size = 2; // LZW has a minimum code size of 2.
+    while (colorTableSize > 1 << size) {
       ++size;
     }
     return size;
@@ -128,12 +135,16 @@ final class LzwEncoder {
     this.codeTable = defaultCodeTable();
 
     // We add an extra bit because of the special "clear" and "end of info" codes.
-    this.codeSize = getMinimumCodeSize(numColors) + 1;
+    this.codeSize = minimumCodeSize + 1;
   }
 
   private Map<List<Integer>, Integer> defaultCodeTable() {
     Map<List<Integer>, Integer> codeTable = new HashMap<>();
-    for (int i = 0; i < numColors; ++i) {
+
+    // The spec indicates that CLEAR_CODE must have a value of 2**minimumCodeSize. Thus we reserve
+    // the first 2**minimumCodeSize codes for colors, even if our color table is smaller.
+    int colorsInCodeTable = 1 << minimumCodeSize;
+    for (int i = 0; i < colorsInCodeTable; ++i) {
       codeTable.put(Collections.singletonList(i), i);
     }
     codeTable.put(CLEAR_CODE, codeTable.size());
