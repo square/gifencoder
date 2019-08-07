@@ -44,8 +44,11 @@ final class LzwEncoder {
   private int codeSize;
   private List<Integer> indexBuffer = new ArrayList<>();
 
+  /**
+   * @param numColors Padded number of colors, must be a power of 2
+   */
   LzwEncoder(int numColors) {
-    this.numColors = numColors;
+    this.numColors = Math.max(numColors, 4);
     resetCodeTableAndCodeSize();
   }
 
