@@ -108,7 +108,6 @@
               <module>
                 <moduleInfoSource>
                   module com.squareup.gifencoder {
-                    requires java.base;
                     exports com.squareup.gifencoder;
                   }
                 </moduleInfoSource>
