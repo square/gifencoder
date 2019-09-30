@@ -32,14 +32,14 @@ outputStream.close();
 
 Gradle:
 ```groovy
-compile 'com.squareup:gifencoder:0.10.0'
+compile 'com.squareup:gifencoder:0.10.1'
 ```
 Maven:
 ```xml
 <dependency>
   <groupId>com.squareup</groupId>
   <artifactId>gifencoder</artifactId>
-  <version>0.10.0</version>
+  <version>0.10.1</version>
 </dependency>
 ```
 Or download [the latest JAR][jar]. 

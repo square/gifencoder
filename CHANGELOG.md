@@ -1,6 +1,12 @@
 Change Log
 ==========
 
+Version 0.10.1 *(2019-09-30)*
+-----------------------------
+
+ * Fix: Do not exlicitly require `java.base` in `module-infojava`.
+
+
 Version 0.10.0 *(2019-09-10)*
 -----------------------------
 
