@@ -47,29 +47,6 @@ Or download [the latest JAR][jar].
 Snapshots of the development version are available in [Sonatype's `snapshots` repository][snap].
 
 
-### Gallery
-
-Simple animation with median-cut quantization and Floyd-Steinberg dithering:
-
-![simple animation](gallery/simple-animation.gif)
-
-Lenna, original PNG:
-
-![Lenna original](gallery/lenna-original.png)
-
-Lenna with uniform quantization and Floyd-Steinberg dithering:
-
-![Lenna with uniform quantization and Floyd-Steinberg dithering](gallery/lenna-uniform.gif)
-
-Lenna GIF with median-cut quantization and Floyd-Steinberg dithering:
-
-![Lenna with median-cut quantization and Floyd-Steinberg dithering](gallery/lenna-median-cut.gif)
-
-Lenna GIF with k-means quantization and Floyd-Steinberg dithering:
-
-![Lenna with k-means quantization and Floyd-Steinberg dithering](gallery/lenna-k-means.gif)
-
-
 
 License
 =======
